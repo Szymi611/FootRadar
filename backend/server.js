@@ -3,7 +3,11 @@ const express = require("express");
 
 const sqlite3 = require("sqlite3").verbose();
 
+const cors = require("cors");
+
 const app = express();
+
+app.use(cors());
 
 const port = 5000;
 
@@ -37,40 +41,92 @@ db.run(`CREATE TABLE IF NOT EXISTS players (
   club_id INTEGER NOT NULL
 )`);
 
+app.get('/teams/:leagueCode', async (req, res) => {
+  const leagueCode = req.params.leagueCode.toUpperCase();
+  try{
+    const response = await fetch(`https://api.football-data.org/v4/competitions/${leagueCode}/teams`, {
+      headers: {"X-Auth-Token": API_KEY},
+    });
 
-//Pobranie wszytskich klubów z ligi angielskiej
-app.get("/EPLteams", async (req, res) => {
-  try {
-    const response = await fetch(
-      "https://api.football-data.org/v4/competitions/PL/teams",
-      {
-        headers: { "X-Auth-Token": API_KEY },
-      }
-    );
-
-    if (!response.ok) {
+    if(!response.ok){
       throw new Error(`Błąd API: ${response.status}`);
     }
-
+    
     const data = await response.json();
-
-    for (let team of data.teams) {
-      db.run(
-        `INSERT OR IGNORE INTO clubs (id, name, short_name, crest) VALUES (?,?,?,?)`,
-        [team.id, team.name, team.shor_name, team.crest],
-        (err) => {
-          if (err) {
-            console.error(err.message);
-          }
+    for(let team of data.teams){
+      db.run(`INSERT OR IGNORE INTO clubs (id, name, short_name, crest) VALUES (?,?,?,?)`, [team.id, team.name, team.short_name, team.crest], (err) => {
+        if(err){
+          console.error(err.message);
         }
-      );
+      });
     }
-    res.json({ message: "Kluby zapisane do bazy" });
-  } catch {
+    res.json({message: `Kluby z ligi ${leagueCode} zapisane do bazy`})
+  }catch(error){
     console.error(error);
-    res.status(500).json({ error: error.message });
+    res.status(500).json({error: error.message});
   }
-});
+})
+
+// //Pobranie wszytskich klubów z ligi angielskiej
+// app.get("/EPLteams", async (req, res) => {
+//   try {
+//     const response = await fetch(
+//       "https://api.football-data.org/v4/competitions/PL/teams",
+//       {
+//         headers: { "X-Auth-Token": API_KEY },
+//       }
+//     );
+
+//     if (!response.ok) {
+//       throw new Error(`Błąd API: ${response.status}`);
+//     }
+
+//     const data = await response.json();
+
+//     for (let team of data.teams) {
+//       db.run(
+//         `INSERT OR IGNORE INTO clubs (id, name, short_name, crest) VALUES (?,?,?,?)`,
+//         [team.id, team.name, team.short_name, team.crest],
+//         (err) => {
+//           if (err) {
+//             console.error(err.message);
+//           }
+//         }
+//       );
+//     }
+//     res.json({ message: "Kluby zapisane do bazy" });
+//   } catch {
+//     console.error(error);
+//     res.status(500).json({ error: error.message });
+//   }
+// });
+
+// //Pobranie wszytskich klubów z ligi włoskiej
+// app.get('/SerieAteams', async(req, res) => {
+//   try {
+//     const response = await fetch("https://api.football-data.org/v4/competitions/SA/teams",{
+//       headers: {"X-Auth-Token": API_KEY},
+//     });
+
+//     if(!response.ok){
+//       throw new Error(`Błąd API: ${response.status}`);
+//     }
+
+//     const data = await response.json();
+
+//     for (let team of data.teams){
+//       db.run(`INSERT OR IGNORE INTO clubs (id, name, short_name, crest) VALUES (?,?,?,?)`, [team.id, team.name, team.short_name, team.crest], (err) =>{
+//         if(err){
+//           console.error(err.message);
+//         }
+//       });
+//     }
+//     res.json({message: "Kluby zapisane do bazy"});
+//   }catch{
+//     console.error(error);
+//     res.status(500).json({error: error.message});
+//   }
+// })
 
 // Zawodnicy konktekretnego klubu znając id pobieranie
 app.get("/players/:teamId", async (req, res) => {
