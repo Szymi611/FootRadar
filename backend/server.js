@@ -42,23 +42,24 @@ db.run(`CREATE TABLE IF NOT EXISTS players (
 )`);
 
 
-// async function getPremierLeagueStandings() {
-//   const response = await fetch("https://api.football-data.org/v4/competitions/PL/standings", {
-//       headers: {
-//           "X-Auth-Token": API_KEY 
-//       }
-//   });
+app.get('/standings/:leagueCode', async (req, res) => {
+  const leagueCode = req.params.leagueCode.toUpperCase();
 
-//   if (!response.ok) {
-//       console.error("Błąd:", response.statusText);
-//       return;
-//   }
+  try{
+    const response = await fetch(`https://api.football-data.org/v4/competitions/${leagueCode}/standings`, {
+      headers: {"X-Auth-Token": API_KEY},
+    })
+    if(!response.ok){
+      throw new Error(`Błąd API: ${response.status}`);
+    }
+    const data = await response.json();
+    res.json(data.standings[0].table);
+  }catch(err){
+    console.error(err);
+    res.status(500).json({error: "Błąd podczas pobierania danych" });
+  }
 
-//   const data = await response.json();
-//   console.log(JSON.stringify(data, null, 2));
-// }
-
-// getPremierLeagueStandings();
+})
 
 app.get('/teams/:leagueCode', async (req, res) => {
   const leagueCode = req.params.leagueCode.toUpperCase();
