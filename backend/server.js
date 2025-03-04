@@ -2,21 +2,15 @@ require("dotenv").config();
 const express = require("express");
 
 const sqlite3 = require("sqlite3").verbose();
-
 const cors = require("cors");
-
 const app = express();
-
 app.use(cors());
 
 const port = 5000;
 
 const API_KEY = process.env.API_KEY;
 
-if (!API_KEY) {
-  console.error("❌ BŁĄD: Brak API_KEY w pliku .env");
-  process.exit(1);
-}
+const leagueCodes = ["PL", "DED", "BSA", "PD", "FL1", "BL1", "PPL", "ELC", "WC", "CL", "EC"];
 
 const db = new sqlite3.Database("scouting.db", (err) => {
   if (err) {
@@ -42,6 +36,31 @@ db.run(`CREATE TABLE IF NOT EXISTS players (
 )`);
 
 
+// GET all league bagdes
+app.get('/leaguesBadges', async (req, res) => {
+  try{
+    const response = await fetch('https://api.football-data.org/v4/competitions', {
+      headers: {"X-Auth-Token": API_KEY},
+    });
+
+    if(!response.ok){
+      throw new Error(`Błąd API: ${response.status}`);
+    }
+
+    const data = await response.json();
+    const filterLeagues = data.competitions.filter(league => leagueCodes.includes(league.code));
+
+    res.json(filterLeagues);
+
+    console.log(data)
+
+  }catch(err){
+    console.error(err);
+    res.status(500).json({error: "Błąd podczas pobierania danych" });
+  }
+})
+
+//Tabela konkretnej ligi
 app.get('/standings/:leagueCode', async (req, res) => {
   const leagueCode = req.params.leagueCode.toUpperCase();
 
@@ -61,6 +80,7 @@ app.get('/standings/:leagueCode', async (req, res) => {
 
 })
 
+//Druzyny  z konkretnej ligi
 app.get('/teams/:leagueCode', async (req, res) => {
   const leagueCode = req.params.leagueCode.toUpperCase();
   try{
@@ -80,7 +100,7 @@ app.get('/teams/:leagueCode', async (req, res) => {
         }
       });
     }
-    res.json({message: `Kluby z ligi ${leagueCode} zapisane do bazy`})
+    res.json(data.teams);
   }catch(error){
     console.error(error);
     res.status(500).json({error: error.message});

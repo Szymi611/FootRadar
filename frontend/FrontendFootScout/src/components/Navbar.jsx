@@ -7,8 +7,8 @@ export default function Navbar() {
   const menuTabs = ['Home', 'About', 'Services', 'Pricing', 'Contact'];
   
   return (
-    // style={{ clipPath: 'polygon(100% 0, 100% 0, 100% 90%, 50% 70%, 0 90%, 0 0)' }}
-    <nav className="bg-white/30 border-gray-200 dark:bg-gray-900 text-white dark:border-gray-800 rounded-bl-4xl rounded-b-4xl shadow-lg" style={{clipPath: !isMenuOpened ? "polygon(100% 0, 100% 0, 100% 90%, 50% 70%, 0 90%, 0 0)" : ""}} >
+    // style={{clipPath: !isMenuOpened ? "polygon(100% 0, 100% 0, 100% 90%, 50% 70%, 0 90%, 0 0)" : ""}} 
+    <nav className="bg-white/30 border-gray-200 dark:bg-gray-900 text-white dark:border-gray-800 rounded-bl-sm rounded-b-sm shadow-lg" >
       <div className="max-w-screen flex flex-wrap items-center justify-between p-2 mr-2">
         <a href="#" className="flex items-center space-x-3 bg-gray-900">
           <img src={Logo} className="h-20 bg-gray-900" alt="Logo app" />
