@@ -3,7 +3,7 @@ import Flag from "react-world-flags";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
-export default function Countries() {
+export default function Badges() {
   const navigate = useNavigate();
   const [badges, setBadges] = useState([]);
 
@@ -34,11 +34,11 @@ export default function Countries() {
 
   return (
     <>
-      <div className="grid grid-cols-10 grid-rows-4 gap-2 mt-2 items-center justify-center place-items-center">
+      <div className="grid grid-cols-auto grid-rows-2 gap-4 w-full mb-6 mt-6 items-center justify-center place-items-center">
         <div className="col-span-10 row-span-2 flex justify-center items-center">
-          <ul className="flex gap-6 mt-4">
+          <ul className="flex gap-6 flex-wrap justify-center ">
             {badges.map((badge) => (
-              <li key={badge.code} className="flex items-center">
+              <li key={badge.code} className="flex items-center justify-center">
                 <img
                   src={badge.emblem}
                   alt={badge.name}
@@ -49,7 +49,6 @@ export default function Countries() {
             ))}
           </ul>
         </div>
-
       </div>
     </>
   );

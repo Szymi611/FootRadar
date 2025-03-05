@@ -10,7 +10,19 @@ const port = 5000;
 
 const API_KEY = process.env.API_KEY;
 
-const leagueCodes = ["PL", "DED", "BSA", "PD", "FL1", "BL1", "PPL", "ELC", "WC", "CL", "EC"];
+const leagueCodes = [
+  "PL",
+  "DED",
+  "BSA",
+  "PD",
+  "FL1",
+  "BL1",
+  "PPL",
+  "ELC",
+  "WC",
+  "CL",
+  "EC",
+];
 
 const db = new sqlite3.Database("scouting.db", (err) => {
   if (err) {
@@ -35,77 +47,141 @@ db.run(`CREATE TABLE IF NOT EXISTS players (
   club_id INTEGER NOT NULL
 )`);
 
-
 // GET all league bagdes
-app.get('/leaguesBadges', async (req, res) => {
-  try{
-    const response = await fetch('https://api.football-data.org/v4/competitions', {
-      headers: {"X-Auth-Token": API_KEY},
-    });
+app.get("/leaguesBadges", async (req, res) => {
+  try {
+    const response = await fetch(
+      "https://api.football-data.org/v4/competitions",
+      {
+        headers: { "X-Auth-Token": API_KEY },
+      }
+    );
 
-    if(!response.ok){
+    if (!response.ok) {
       throw new Error(`Błąd API: ${response.status}`);
     }
 
     const data = await response.json();
-    const filterLeagues = data.competitions.filter(league => leagueCodes.includes(league.code));
+    const filterLeagues = data.competitions.filter((league) =>
+      leagueCodes.includes(league.code)
+    );
 
     res.json(filterLeagues);
 
-    console.log(data)
-
-  }catch(err){
+    console.log(data);
+  } catch (err) {
     console.error(err);
-    res.status(500).json({error: "Błąd podczas pobierania danych" });
+    res.status(500).json({ error: "Błąd podczas pobierania danych" });
   }
-})
+});
 
 //Tabela konkretnej ligi
-app.get('/standings/:leagueCode', async (req, res) => {
+app.get("/standings/:leagueCode", async (req, res) => {
   const leagueCode = req.params.leagueCode.toUpperCase();
 
-  try{
-    const response = await fetch(`https://api.football-data.org/v4/competitions/${leagueCode}/standings`, {
-      headers: {"X-Auth-Token": API_KEY},
-    })
-    if(!response.ok){
-      throw new Error(`Błąd API: ${response.status}`);
+  try {
+    const response = await fetch(
+      `https://api.football-data.org/v4/competitions/${leagueCode}/standings`,
+      {
+        headers: { "X-Auth-Token": API_KEY },
+      }
+    );
+    if (!response.ok) {
+      throw new Error(`Błąd API: ${response.status} ${response.statusText}`);
     }
     const data = await response.json();
     res.json(data.standings[0].table);
-  }catch(err){
+  } catch (err) {
     console.error(err);
-    res.status(500).json({error: "Błąd podczas pobierania danych" });
+    res.status(500).json({ error: "Błąd podczas pobierania danych" });
+  }
+});
+
+app.get("/scorers/:leagueCode", async (req, res) => {
+  const leagueCode = req.params.leagueCode.toUpperCase();
+  try {
+    const response = await fetch(
+      `https://api.football-data.org/v4/competitions/${leagueCode}/scorers`,
+      {
+        headers: { "X-Auth-Token": API_KEY },
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(`Błąd API: ${response.status} ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    res.json(data.scorers);
+    console.log(data);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Błąd podczas pobierania danych" });
+  }
+});
+
+//Mecze z konkretnej ligi konkretnego tygodnia
+app.get("/:leagueCode/matches", async (req, res) => {
+  const leagueCode = req.params.leagueCode.toUpperCase();
+  const matchday = req.query.matchday; 
+
+  if (!matchday) {
+      return res.status(400).json({ error: "Brak parametru matchday" });
   }
 
-})
+  try {
+      const response = await fetch(
+          `https://api.football-data.org/v4/competitions/${leagueCode}/matches?matchday=${matchday}`,
+          {
+              headers: { "X-Auth-Token": API_KEY },
+          }
+      );
+
+      if (!response.ok) {
+          throw new Error(`Błąd API: ${response.status} ${response.statusText}`);
+      }
+
+      const data = await response.json();
+      res.json(data.matches);
+  } catch (err) {
+      console.error(err);
+      res.status(500).json({ error: "Błąd podczas pobierania danych" });
+  }
+});
 
 //Druzyny  z konkretnej ligi
-app.get('/teams/:leagueCode', async (req, res) => {
+app.get("/teams/:leagueCode", async (req, res) => {
   const leagueCode = req.params.leagueCode.toUpperCase();
-  try{
-    const response = await fetch(`https://api.football-data.org/v4/competitions/${leagueCode}/teams`, {
-      headers: {"X-Auth-Token": API_KEY},
-    });
+  try {
+    const response = await fetch(
+      `https://api.football-data.org/v4/competitions/${leagueCode}/teams`,
+      {
+        headers: { "X-Auth-Token": API_KEY },
+      }
+    );
 
-    if(!response.ok){
+    if (!response.ok) {
       throw new Error(`Błąd API: ${response.status}`);
     }
-    
+
     const data = await response.json();
-    for(let team of data.teams){
-      db.run(`INSERT OR IGNORE INTO clubs (id, name, short_name, crest) VALUES (?,?,?,?)`, [team.id, team.name, team.short_name, team.crest], (err) => {
-        if(err){
-          console.error(err.message);
+    for (let team of data.teams) {
+      db.run(
+        `INSERT OR IGNORE INTO clubs (id, name, short_name, crest) VALUES (?,?,?,?)`,
+        [team.id, team.name, team.short_name, team.crest],
+        (err) => {
+          if (err) {
+            console.error(err.message);
+          }
         }
-      });
+      );
     }
     res.json(data.teams);
-  }catch(error){
+  } catch (error) {
     console.error(error);
-    res.status(500).json({error: error.message});
+    res.status(500).json({ error: error.message });
   }
-})
+});
 
 // Zawodnicy konktekretnego klubu znając id pobieranie
 app.get("/players/:teamId", async (req, res) => {
@@ -170,8 +246,8 @@ app.get("/clubs", (req, res) => {
       return;
     }
     res.json(rows);
-  }) 
-})
+  });
+});
 
 app.listen(port, () => {
   console.log(`Serwer działa na porcie ${port}`);

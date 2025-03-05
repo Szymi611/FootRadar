@@ -25,16 +25,16 @@ const LeagueTable = ({ leagueCode }) => {
 
   return (
     <>
-      <h2 className="text-2xl font-bold mb-4 text-center col-span-2">
+      <h2 className="text-2xl font-bold mb-2 text-center col-span-2">
         Tabela {leagueCode.toUpperCase()}
       </h2>
-        <table className="w-full border-collapse border border-gray-400">
+        <table className="w-[80%] border-collapse border border-gray-400 justify-center items-center mx-auto">
           <thead>
             <tr className="bg-gray-200">
-              <th className="border border-gray-400 p-3">Pozycja</th>
-              <th className="border border-gray-400 p-3">Drużyna</th>
-              <th className="border border-gray-400 p-3">Mecze</th>
-              <th className="border border-gray-400 p-3">Punkty</th>
+              <th className="border border-gray-400 p-1">Pozycja</th>
+              <th className="border border-gray-400 p-1">Drużyna</th>
+              <th className="border border-gray-400 p-1">Mecze</th>
+              <th className="border border-gray-400 p-1">Punkty</th>
             </tr>
           </thead>
           <tbody>

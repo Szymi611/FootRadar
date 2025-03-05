@@ -9,7 +9,7 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={<MainPage />}/>
-        <Route path="/clubs/:LeagueCode" element={<Clubs />} />
+        {/* <Route path="/clubs/:LeagueCode" element={<Clubs />} /> */}
         {/* <Clubs /> */}
       </Routes>
     </>
