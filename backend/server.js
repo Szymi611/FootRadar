@@ -202,41 +202,36 @@ app.get("/players/:teamId", async (req, res) => {
     const data = await response.json();
     const players = data.squad;
 
-    for (let player of players) {
-      db.run(
-        `INSERT OR IGNORE INTO players (name, age, nationality, position, club_id) VALUES (?, ?, ?, ?, ?)`,
-        [
-          player.name,
-          player.dateOfBirth,
-          player.nationality,
-          player.position,
-          teamId,
-        ],
-        (err) => {
-          if (err) {
-            console.error(err.message);
-          }
-        }
-      );
-    }
-
-    res.json({ message: "Zawodnicy zapisani do bazy" });
+    res.json(players);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: error.message });
   }
 });
 
-//Wszyscy zawodnicy z bazy
-app.get("/players", (req, res) => {
-  db.all(`SELECT * FROM players`, [], (err, rows) => {
-    if (err) {
-      res.status(500).json({ error: err.message });
-      return;
+//Mecze konkretnego klubu
+app.get("/matches/:teamId", async (req, res) => {
+  const teamId = req.params.teamId;
+
+  try{
+    const response = await fetch(`https://api.football-data.org/v4/teams/${teamId}/matches/`, {
+      headers: {"X-Auth-Token": API_KEY}
+    });
+
+    if(!response.ok){
+      throw new Error(`Błąd API: ${response.status}`);
     }
-    res.json(rows);
-  });
-});
+
+    const data = await response.json();
+    res.json(data);
+    console.log(data);
+
+  }catch(err){
+    console.error(err);
+    res.status(500).json({error: err.message});
+  }
+})
+
 
 //Wszystkie kluby z bazy
 app.get("/clubs", (req, res) => {

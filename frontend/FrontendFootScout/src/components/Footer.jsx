@@ -22,7 +22,7 @@ export default function Footer() {
                   About
                 </a>
               </li>
-              <li>
+              <li >
                 <a href="#" className="me-4 md:me-6 relative self-center text-md font-semibold whitespace-nowrap
           after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-blue-700 after:transition-all after:duration-300 hover:after:w-full ">
                   Privacy Policy

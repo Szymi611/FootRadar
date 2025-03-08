@@ -1,4 +1,5 @@
 import stadium from "../assets/stadium.jpeg";
+import retro from "../assets/retro.png";
 import Footer from "./Footer";
 import ArticleBP from "./MPComponents/ArticleBP";
 import Badges from "./MPComponents/Badges";
@@ -14,9 +15,14 @@ export default function MainPage() {
     <>
       <Navbar />
       <div className="relative w-full ">
-        <div className="relative w-full">
+        <div className="relative w-full h-[500px] flex ">
           <img
             src={stadium}
+            className="w-full h-full object-cover"
+            alt="Stadion"
+          />
+          <img
+            src={retro}
             className="w-full h-full object-cover"
             alt="Stadion"
           />

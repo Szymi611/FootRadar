@@ -1,11 +1,12 @@
 import { useCallback, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-
-export default function ShortenTables({leagueCode}) {
-
-
+export default function ShortenTables({ leagueCode }) {
   const [standings, setStandings] = useState([]);
+  const [selectedTeamId, setSelectedTeamId] = useState(null);
   const [error, setError] = useState(null);
+
+  const navigation = useNavigate();
 
   useEffect(() => {
     const fetchStandings = async () => {
@@ -22,10 +23,16 @@ export default function ShortenTables({leagueCode}) {
       } catch (err) {
         setError(err.message);
       }
-      
     };
     fetchStandings();
   }, [leagueCode]);
+
+  const handleTeamClick = (teamId) =>{
+
+    navigation(`/club/${teamId}`)
+  }
+
+  console.log(standings)
 
   return (
     <>
@@ -43,13 +50,15 @@ export default function ShortenTables({leagueCode}) {
             <tr key={team.team.id} className="text-center">
               <td className="border border-gray-400 p-3">{team.position}</td>
               <td className="border border-gray-400 p-3 flex items-center gap-2">
-                <img
-                  src={team.team.crest}
-                  alt={team.team.name}
-                  width="30"
-                  height="30"
-                />
-                <p className="text-center text-sm">{team.team.name}</p>
+                <div className="flex items-center gap-2 cursor-pointer" onClick={() => handleTeamClick(team.team.id)}>
+                  <img
+                    src={team.team.crest}
+                    alt={team.team.name}
+                    width="30"
+                    height="30"
+                  />
+                  <p className="text-center text-sm">{team.team.name}</p>
+                </div>
               </td>
               <td className="border border-gray-400 p-3 ">
                 {team.playedGames}
