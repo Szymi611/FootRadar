@@ -64,7 +64,12 @@ Aplikacja powinna być teraz dostępna pod `http://localhost:3000`.
 - ⚽ Zdjęcia piłkarzy i trenerów
 
 ## Screenshots 📸
+![image](https://github.com/user-attachments/assets/1661c1af-8e34-4c6d-a68e-02608ea3014e)
+
 ![image](https://github.com/user-attachments/assets/c48e3d08-7157-4ac2-86f9-6afb5b58dc2b)
+
+![image](https://github.com/user-attachments/assets/d5aeadd3-5e7e-4842-ac31-f2309371458c)
+
 
 
 ## 📬 Kontakt
