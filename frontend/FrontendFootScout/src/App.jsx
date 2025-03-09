@@ -1,4 +1,4 @@
-import ClubPage from "./components/ClubPage";
+import ClubPage from "./components/ClubPageComponents/ClubPage";
 import Clubs from "./components/MPComponents/Clubs"
 import MainPage from "./components/MainPage"
 import { Routes, Route } from "react-router-dom";

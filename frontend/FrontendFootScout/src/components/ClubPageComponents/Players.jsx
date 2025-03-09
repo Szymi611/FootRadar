@@ -4,6 +4,8 @@ export default function Players({teamId}) {
 
   const [players, setPlayers] = useState();
 
+  const actualYear = new Date().getFullYear();
+
   useEffect(() => {
     const getPlayers = async () => {
       try {
@@ -30,12 +32,13 @@ export default function Players({teamId}) {
         <ul className="flex flex-wrap justify-center">
           {players &&
             players.map((player) => (
-              <li key={player.id} className="w-[200px] h-[200px] m-2">
-                <div className="w-full h-full flex flex-col items-center justify-center p-2 bg-gray-200 text-center">
-                  <h1 className="text-lg font-semibold">{player.name}</h1>
-                  <p className="text-sm">Position: {player.position}</p>
-                  <p className="text-sm">Nationality: {player.nationality}</p>
-                  <p className="text-sm">Date of Birth: {player.dateOfBirth}</p>
+              <li key={player.id} className="w-[300px] h-[300px] m-2">
+                <div className="w-full h-full flex flex-col items-center justify-center p-2 bg-gray-200 text-center rounded-2xl ">
+                  <h1 className="text-xl font-semibold">{player.name}</h1>
+                  <p className="text-md">Position: {player.position}</p>
+                  <p className="text-md">Nationality: {player.nationality}</p>
+                  <p className="text-md">Age:{" "} {actualYear - parseInt(player.dateOfBirth.split("-")[0])}</p>
+                  <p className="text-md">Date of Birth: {player.dateOfBirth}</p>
                 </div>
               </li>
             ))}

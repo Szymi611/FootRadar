@@ -97,6 +97,7 @@ app.get("/standings/:leagueCode", async (req, res) => {
   }
 });
 
+//Strzelcy konkretnej ligi
 app.get("/scorers/:leagueCode", async (req, res) => {
   const leagueCode = req.params.leagueCode.toUpperCase();
   try {
@@ -232,6 +233,49 @@ app.get("/matches/:teamId", async (req, res) => {
   }
 })
 
+//Konrektny klub
+app.get("/team/:teamId", async (req, res) => {
+  const teamId = req.params.teamId;
+  try{
+    const response = await fetch(`https://api.football-data.org/v4/teams/${teamId}`, {
+      headers: {"X-Auth-Token": API_KEY}
+    })
+
+    if(!response.ok){
+      throw new Error(`Błąd API: ${response.status}`);
+    }
+
+    const data = await response.json();
+    res.json(data);
+
+  }catch(err){
+    console.error(err);
+    res.status(500).json({error: err.message});
+  }
+})
+
+//Crest konkretnego klubu
+app.get("/crest/:teamId", async (req, res) => {
+  const teamId = req.params.teamId;
+
+  try{
+    const response = await fetch(`https://api.football-data.org/v4/teams/${teamId}`, {
+      headers: {"X-Auth-Token": API_KEY}
+    })
+
+    if(!response.ok){
+      throw new Error(`Błąd API: ${response.status}`);
+    }
+
+    const data = await response.json();
+    res.json({crest: data.crest, coach: data.coach});
+
+
+  }catch(err){
+    console.error(err)
+    res.status(500).json({error: err.message});
+  }
+})
 
 //Wszystkie kluby z bazy
 app.get("/clubs", (req, res) => {
