@@ -38,7 +38,7 @@ export default function ClubPage() {
   return (
     <>
       <h1 className="text-4xl text-center mt-6">{clubInfo.name}</h1>
-      <div className="grid grid-cols-6 grid-rows-6 gap-4">
+      <div className="grid grid-cols-6 grid-rows-6 gap-4 ml-2">
         <div className="col-span-3 row-span-2">
           <ClubCrest teamId={teamId} clubDetails={clubDetails}/>
         </div>

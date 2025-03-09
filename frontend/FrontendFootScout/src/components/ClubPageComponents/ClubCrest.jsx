@@ -51,7 +51,7 @@ export default function ClubCrest({
           {coach && (
             <>
               <div className=" flex flex-col justify-end h-[60%]">
-                <h1 className="text-2xl text-center mr-6 font-bold">
+                <h1 className="text-2xl  mr-6 font-bold">
                   Coach: {coach.name}
                 </h1>
                 <p>Nationality: {coach.nationality}</p>

@@ -13,7 +13,6 @@ import Navbar from "./Navbar";
 export default function MainPage() {
   return (
     <>
-      <Navbar />
       <div className="relative w-full ">
         <div className="relative w-full h-[500px] flex ">
           <img
