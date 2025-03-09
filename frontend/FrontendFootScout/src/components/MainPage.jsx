@@ -3,12 +3,7 @@ import retro from "../assets/retro.png";
 import Footer from "./Footer";
 import ArticleBP from "./MPComponents/ArticleBP";
 import Badges from "./MPComponents/Badges";
-import LeagueTable from "./MPComponents/LeagueTable";
-import NextGames from "./MPComponents/NextGames";
-import ScorersShorten from "./MPComponents/ScorersShorten";
 import Shorten from "./MPComponents/Shorten";
-import ShortenTables from "./MPComponents/ShortenTables";
-import Navbar from "./Navbar";
 
 export default function MainPage() {
   return (

@@ -5,7 +5,7 @@ import { MdNavigateNext } from "react-icons/md";
 import { useCallback, useState } from "react";
 
 export default function Shorten() {
-  const leagueCodes = ["PL", "DED", "BSA", "PD", "FL1", "BL1", "PPL", "ELC"];
+  const leagueCodes = ["PL","PD", "BL1", "DED", "BSA",  "FL1",  "PPL", "ELC"];
 
   const [leagueCode, setLeagueCode] = useState(leagueCodes[0]);
 

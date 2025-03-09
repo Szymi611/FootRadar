@@ -12,7 +12,7 @@ export default function Badges() {
     navigate(`/clubs/${code}`);
   }
 
-  const leagueCodes = ["PL", "DED", "BSA", "PD", "FL1", "BL1", "PPL", "ELC"];
+  const leagueCodes = ["PL", "PD", "DED", "BSA", "FL1", "BL1", "PPL", "ELC"];
 
   useEffect(() => {
     async function getBadges() {

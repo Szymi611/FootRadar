@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import ClubItem from "../ClubItem";
-import LeagueTable from "./LeagueTable";
+import ClubItem from "./ClubItem";
+import LeagueTable from "./MPComponents/LeagueTable";
 import { useParams } from "react-router-dom";
 
 export default function Clubs() {
