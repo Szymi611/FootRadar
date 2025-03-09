@@ -63,6 +63,10 @@ Aplikacja powinna być teraz dostępna pod `http://localhost:3000`.
 - 🌍 Integracja z API sportowymi dla aktualnych danych.
 - ⚽ Zdjęcia piłkarzy i trenerów
 
+## Screenshots 📸
+![image](https://github.com/user-attachments/assets/c48e3d08-7157-4ac2-86f9-6afb5b58dc2b)
+
+
 ## 📬 Kontakt
 Jeśli masz pomysły na rozwój lub chcesz współtworzyć projekt, śmiało otwórz issue lub wyślij pull request!
 
