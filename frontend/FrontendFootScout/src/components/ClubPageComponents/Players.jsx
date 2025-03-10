@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
 
-export default function Players({teamId}) {
-
-  const [players, setPlayers] = useState();
+export default function Players({ teamId }) {
+  const [players, setPlayers] = useState([]);
 
   const actualYear = new Date().getFullYear();
 
@@ -37,7 +36,12 @@ export default function Players({teamId}) {
                   <h1 className="text-xl font-semibold">{player.name}</h1>
                   <p className="text-md">Position: {player.position}</p>
                   <p className="text-md">Nationality: {player.nationality}</p>
-                  <p className="text-md">Age:{" "} {actualYear - parseInt(player.dateOfBirth.split("-")[0])}</p>
+                  <p>
+                    Age:{" "}
+                    {player
+                      ? actualYear - parseInt(player.dateOfBirth.split("-")[0])
+                      : "N/A"}
+                  </p>
                   <p className="text-md">Date of Birth: {player.dateOfBirth}</p>
                 </div>
               </li>

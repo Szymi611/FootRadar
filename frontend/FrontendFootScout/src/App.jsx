@@ -1,5 +1,5 @@
 import ClubPage from "./components/ClubPageComponents/ClubPage";
-import Clubs from "./components/Clubs"
+import LeaguePage from "./components/LeaguePage";
 import MainPage from "./components/MainPage"
 import { Routes, Route } from "react-router-dom";
 
@@ -10,7 +10,7 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={<MainPage />}/>
-        <Route path="/clubs/:LeagueCode" element={<Clubs />} />
+        <Route path="/league/:LeagueCode" element={<LeaguePage />} />
         <Route path="/club/:clubId" element={<ClubPage />} />
       </Routes>
     </>

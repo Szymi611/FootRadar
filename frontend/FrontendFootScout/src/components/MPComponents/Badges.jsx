@@ -9,7 +9,7 @@ export default function Badges() {
 
   function handleLeagueChoice(code) {
     console.log(code);
-    navigate(`/clubs/${code}`);
+    navigate(`/league/${code}`);
   }
 
   const leagueCodes = ["PL", "PD", "DED", "BSA", "FL1", "BL1", "PPL", "ELC"];
