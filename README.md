@@ -36,7 +36,7 @@ FootScout został zbudowany przy użyciu nowoczesnych technologii webowych:
 
 ### Instalacja i uruchomienie
 
-##‼️ Do poprawnego działania aplikacji potrzeba wygenerować apikey na stronie https://www.football-data.org założenie konta jest darmowe i odrazu po jego założeniu tego otrzymuje się apikey który należy umieścić w pliku .env w folderze backend w formacie API_KEY="YOUR-API-KEY"
+‼️ Do poprawnego działania aplikacji potrzeba wygenerować apikey na stronie https://www.football-data.org założenie konta jest darmowe i odrazu po jego założeniu tego otrzymuje się apikey który należy umieścić w pliku .env w folderze backend w formacie API_KEY="YOUR-API-KEY"
 
 1. **Sklonuj repozytorium:**
    ```bash
