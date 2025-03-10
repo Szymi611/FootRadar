@@ -3,6 +3,7 @@
 ## 📌 O projekcie
 FootScout to nowoczesna platforma internetowa dla fanów piłki nożnej, która umożliwia szybki dostęp do najważniejszych informacji o rozgrywkach ligowych. Aplikacja pozwala na przeglądanie tabel ligowych, klasyfikacji najlepszych strzelców oraz szczegółowych profili klubów, w tym składu, trenera i harmonogramu meczów. W przyszłości planowane jest rozszerzenie funkcjonalności o pełnoprawną stronę dedykowaną poszczególnym ligom.
 
+
 ## ✨ Kluczowe funkcje
 - 📊 **Tabela ligowa** – aktualne zestawienie drużyn i ich pozycji w lidze.
 - ⚽ **Najlepsi strzelcy** – lista piłkarzy z największą liczbą goli.
@@ -34,6 +35,9 @@ FootScout został zbudowany przy użyciu nowoczesnych technologii webowych:
 - SQLite3
 
 ### Instalacja i uruchomienie
+
+##‼️ Do poprawnego działania aplikacji potrzeba wygenerować apikey na stronie https://www.football-data.org założenie konta jest darmowe i odrazu po jego założeniu tego otrzymuje się apikey który należy umieścić w pliku .env w folderze backend w formacie API_KEY="YOUR-API-KEY"
+
 1. **Sklonuj repozytorium:**
    ```bash
    git clone https://github.com/Szymi611/FootScout.git
@@ -44,7 +48,7 @@ FootScout został zbudowany przy użyciu nowoczesnych technologii webowych:
    ```bash
    cd backend
    npm install
-   npm start
+   node server.js
    ```
 
 3. **Uruchom frontend:**
@@ -54,7 +58,7 @@ FootScout został zbudowany przy użyciu nowoczesnych technologii webowych:
    npm start
    ```
 
-Aplikacja powinna być teraz dostępna pod `http://localhost:3000`.
+Aplikacja powinna być teraz dostępna pod `http://localhost:5173`.
 
 ## 🎯 Przyszłe plany rozwoju
 - 🏆 Strona dedykowana dla każdej ligi,
