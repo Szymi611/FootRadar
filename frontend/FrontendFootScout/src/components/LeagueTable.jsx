@@ -28,25 +28,25 @@ const LeagueTable = ({ leagueCode }) => {
       <h2 className="text-2xl font-bold mb-4 text-center col-span-2">
         Tabela {leagueCode.toUpperCase()}
       </h2>
-        <table className="w-full border-collapse border border-gray-400">
+        <table className="w-full border-collapse border border-gray-600">
           <thead>
             <tr className="bg-gray-200">
-              <th className="border border-gray-400 p-3">Pozycja</th>
-              <th className="border border-gray-400 p-3">Drużyna</th>
-              <th className="border border-gray-400 p-3">Mecze</th>
-              <th className="border border-gray-400 p-3">Punkty</th>
+              <th className="border border-gray-600 p-3">Pozycja</th>
+              <th className="border border-gray-600 p-3">Drużyna</th>
+              <th className="border border-gray-600 p-3">Mecze</th>
+              <th className="border border-gray-600 p-3">Punkty</th>
             </tr>
           </thead>
           <tbody>
             {standings.map((team) => (
               <tr key={team.team.id} className="text-center">
-                <td className="border border-gray-400 p-3">{team.position}</td>
-                <td className="border border-gray-400 p-3 flex items-center gap-2">
+                <td className="border border-gray-600 p-3">{team.position}</td>
+                <td className="border border-gray-600 p-3 flex items-center gap-2">
                   <img src={team.team.crest} alt={team.team.name} width="30" height="30" />
                   <p className="text-center">{team.team.name}</p>
                 </td>
-                <td className="border border-gray-400 p-3">{team.playedGames}</td>
-                <td className="border border-gray-400 p-3 font-bold">{team.points}</td>
+                <td className="border border-gray-600 p-3">{team.playedGames}</td>
+                <td className="border border-gray-600 p-3 font-bold bg-gray-400">{team.points}</td>
               </tr>
             ))}
           </tbody>
