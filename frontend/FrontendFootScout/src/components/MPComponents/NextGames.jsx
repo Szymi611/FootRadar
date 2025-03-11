@@ -4,7 +4,7 @@ export default function NextGames({ leagueCode, matchday }) {
   const [matches, setMatches] = useState([]);
   const [error, setError] = useState(null);
 
-  console.log(matchday)
+
 
   useEffect(() => {
     const getMatches = async () => {
@@ -21,7 +21,7 @@ export default function NextGames({ leagueCode, matchday }) {
 
         const data = await response.json();
         setMatches(data);
-        console.log(data);
+        
       } catch (err) {
         setError(err.message);
       }

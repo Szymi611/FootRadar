@@ -24,7 +24,6 @@ export default function Players({ teamId }) {
     if (teamId) getPlayers();
   }, [teamId]);
 
-
   return (
     <>
       <div className="h-screen w-full">
@@ -38,7 +37,7 @@ export default function Players({ teamId }) {
                   <p className="text-md">Nationality: {player.nationality}</p>
                   <p>
                     Age:{" "}
-                    {player
+                    {player.dateOfBirth
                       ? actualYear - parseInt(player.dateOfBirth.split("-")[0])
                       : "N/A"}
                   </p>
