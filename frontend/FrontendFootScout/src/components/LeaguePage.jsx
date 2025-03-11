@@ -33,7 +33,6 @@ export default function LeaguePage() {
 
   return (
     <div className="overflow-auto min-h-screen m-4">
-      <h1 className="text-black text-center text-4xl">Clubs</h1>
       <div className="grid grid-cols-3 grid-rows-4 gap-4 h-max-screen">
         <div className="col-span-2 row-span-3  p-4 mt-4">
           <ul className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2">

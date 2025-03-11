@@ -4,7 +4,7 @@ import { FiMenu, FiX } from "react-icons/fi";
 
 export default function Navbar() {
   const [isMenuOpened, setIsMenuOpened] = useState(false);
-  const menuTabs = ['Home', 'About', 'Services', 'Pricing', 'Contact'];
+  const menuTabs = ['Home', 'About', 'OurBets', 'Pricing', 'Contact'];
   
   return (
     // style={{clipPath: !isMenuOpened ? "polygon(100% 0, 100% 0, 100% 90%, 50% 70%, 0 90%, 0 0)" : ""}} 

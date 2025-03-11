@@ -32,7 +32,6 @@ export default function ShortenTables({ leagueCode }) {
     navigation(`/club/${teamId}`)
   }
 
-  console.log(standings)
 
   return (
     <>
