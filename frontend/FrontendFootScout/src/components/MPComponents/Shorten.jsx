@@ -2,10 +2,35 @@ import NextGames from "./NextGames";
 import ShortenTables from "./ShortenTables";
 import ScorersShorten from "./ScorersShorten";
 import { MdNavigateNext } from "react-icons/md";
-import { useCallback, useState } from "react";
+import { useCallback, useState, useEffect } from "react";
 
 export default function Shorten() {
-  const leagueCodes = ["PL","PD", "BL1", "DED", "BSA",  "FL1",  "PPL", "ELC"];
+  const [matchday, setMatchday] = useState("");
+  const [error, setError] = useState(null);
+
+  const leagueCodes = ["PL", "PD", "BL1", "DED", "BSA", "FL1", "PPL", "ELC"];
+
+  useEffect(() => {
+    const getMatchday = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:5000/matchday/${leagueCode}`
+        );
+
+        if (!response.ok) {
+          throw new Error(
+            `Błąd API: ${response.status} ${response.statusText}`
+          );
+        }
+        const data = await response.json();
+        setMatchday(data.matchday);
+      } catch {
+        setError(err.message);
+      }
+      console.log(data);
+    };
+    getMatchday();
+  }, [matchday]);
 
   const [leagueCode, setLeagueCode] = useState(leagueCodes[0]);
 
@@ -45,13 +70,13 @@ export default function Shorten() {
       </div>
       <div className="grid grid-cols-6 grid-rows-3 gap-4">
         <div className="row-span-3 col-start-3 row-start-1">
-          <ScorersShorten leagueCode={leagueCode}/>
+          <ScorersShorten leagueCode={leagueCode} />
         </div>
         <div className="col-span-2 row-span-3 col-start-1 row-start-1">
-          <ShortenTables leagueCode={leagueCode}/>
+          <ShortenTables leagueCode={leagueCode} />
         </div>
         <div className="col-span-3 row-span-3 col-start-4">
-          <NextGames leagueCode={leagueCode}/>
+          <NextGames leagueCode={leagueCode} matchday={matchday} />
         </div>
       </div>
     </>

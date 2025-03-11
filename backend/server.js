@@ -277,6 +277,30 @@ app.get("/crest/:teamId", async (req, res) => {
   }
 })
 
+app.get('/matchday/:leagueCode', async (req, res) => {
+  const leagueCode = req.params.leagueCode.toUpperCase();
+  try{
+    const response = await fetch(`https://api.football-data.org/v4/competitions/${leagueCode}`,
+      {
+        headers: {"X-Auth-Token": API_KEY}
+      }
+    )
+
+    if(!response.ok){
+      throw new Error(`Błąd API: ${response.status}`);
+    }
+    const data = await response.json();
+    const currentMatchday = data.currentSeason.currentMatchday;
+
+    res.json({ matchday: currentMatchday }); 
+    console.log(currentMatchday);
+
+  }catch(err){
+    console.error(err);
+    res.status(500).json({error: err.message});
+  }
+})
+
 //Wszystkie kluby z bazy
 app.get("/clubs", (req, res) => {
   db.all(`SELECT * FROM clubs`, [], (err, rows) => {
@@ -287,6 +311,8 @@ app.get("/clubs", (req, res) => {
     res.json(rows);
   });
 });
+
+
 
 app.listen(port, () => {
   console.log(`Serwer działa na porcie ${port}`);

@@ -1,12 +1,10 @@
 import { useEffect, useState } from "react";
 
-export default function NextGames({ leagueCode }) {
+export default function NextGames({ leagueCode, matchday }) {
   const [matches, setMatches] = useState([]);
   const [error, setError] = useState(null);
 
-  const date = new Date();
-  // console.log(date)
-  const matchday = 28;
+  console.log(matchday)
 
   useEffect(() => {
     const getMatches = async () => {
