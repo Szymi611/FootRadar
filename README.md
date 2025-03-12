@@ -1,7 +1,7 @@
 # FootRadar ⚽
 
 ## 📌 O projekcie
-FootScout to nowoczesna platforma internetowa dla fanów piłki nożnej, która umożliwia szybki dostęp do najważniejszych informacji o rozgrywkach ligowych. Aplikacja pozwala na przeglądanie tabel ligowych, klasyfikacji najlepszych strzelców oraz szczegółowych profili klubów, w tym składu, trenera i harmonogramu meczów. W przyszłości planowane jest rozszerzenie funkcjonalności o pełnoprawną stronę dedykowaną poszczególnym ligom.
+FootRadar to nowoczesna platforma internetowa dla fanów piłki nożnej, która umożliwia szybki dostęp do najważniejszych informacji o rozgrywkach ligowych. Aplikacja pozwala na przeglądanie tabel ligowych, klasyfikacji najlepszych strzelców oraz szczegółowych profili klubów, w tym składu, trenera i harmonogramu meczów. W przyszłości planowane jest rozszerzenie funkcjonalności o pełnoprawną stronę dedykowaną poszczególnym ligom.
 
 
 ## ✨ Kluczowe funkcje
