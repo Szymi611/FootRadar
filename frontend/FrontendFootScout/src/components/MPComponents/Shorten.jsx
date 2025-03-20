@@ -27,7 +27,6 @@ export default function Shorten() {
       } catch {
         setError(err.message);
       }
-      console.log(data);
     };
     getMatchday();
   }, [matchday]);
