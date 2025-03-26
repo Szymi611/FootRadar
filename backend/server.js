@@ -26,6 +26,7 @@ const leagueCodes = [
 
 const leagueRoutes = require('./routes/league')
 const clubRoutes = require('./routes/club')
+const f1Routes = require('./routes/f1')
 
 const db = require('./db');
 
@@ -87,6 +88,7 @@ app.get("/clubs", (req, res) => {
 
 app.use(leagueRoutes);
 app.use(clubRoutes);
+app.use(f1Routes)
 
 app.listen(port, () => {
   console.log(`Serwer działa na porcie ${port}`);
