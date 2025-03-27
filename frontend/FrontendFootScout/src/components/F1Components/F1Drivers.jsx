@@ -13,7 +13,7 @@ export default function F1Drivers() {
         }
 
         const data = await response.json();
-        console.log(data);
+        // console.log(data);
         setDrivers(data);
       } catch (err) {
         console.error(err);
