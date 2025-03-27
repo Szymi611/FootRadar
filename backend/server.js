@@ -1,6 +1,6 @@
 require("dotenv").config();
 const express = require("express");
-
+const mongoose = require("mongoose");
 
 const cors = require("cors");
 const app = express();
@@ -9,6 +9,7 @@ app.use(cors());
 const port = 5000;
 
 const API_KEY = process.env.API_KEY;
+const PasswordDB = process.env.PASSWORDDB;
 
 const leagueCodes = [
   "PL",
@@ -24,11 +25,22 @@ const leagueCodes = [
   "EC",
 ];
 
-const leagueRoutes = require('./routes/league')
-const clubRoutes = require('./routes/club')
-const f1Routes = require('./routes/f1')
+const leagueRoutes = require("./routes/league");
+const clubRoutes = require("./routes/club");
+const f1Routes = require("./routes/f1");
 
-const db = require('./db');
+const db = require("./db");
+
+mongoose
+  .connect(
+    `mongodb+srv://szymondomagala:${PasswordDB}@cluster0.uugjt33.mongodb.net/Formula1`
+  )
+  .then((result) => {
+    console.log("Connected to MongoDB");
+  })
+  .catch((err) => {
+    console.error("Connection error", err);
+  });
 
 db.run(`CREATE TABLE IF NOT EXISTS clubs (
   id INTEGER PRIMARY KEY,
@@ -85,10 +97,9 @@ app.get("/clubs", (req, res) => {
   });
 });
 
-
 app.use(leagueRoutes);
 app.use(clubRoutes);
-app.use(f1Routes)
+app.use(f1Routes);
 
 app.listen(port, () => {
   console.log(`Serwer działa na porcie ${port}`);

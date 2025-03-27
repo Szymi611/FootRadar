@@ -1,4 +1,4 @@
-
+const Track = require('../models/trackSchema')
 
 exports.getDriver = async (req, res, next) => {
   try{
@@ -67,3 +67,14 @@ exports.getAllIncidents = async (req, res, next) => {
     res.status(500).json({error: err.message})
   }
 }
+
+exports.getTracks = async (req, res) => {
+  try {
+    const races = await Track.find();
+    console.log("Fetched races:", races); 
+    res.status(200).json(races);
+  } catch (err) {
+    console.error("Error fetching races", err);
+    res.status(500).json({ message: "Server Error" });
+  }
+};

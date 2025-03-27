@@ -12,4 +12,6 @@ router.get('/f1/sessions/:year', f1Controller.getAllSessions) //Specjalnego roku
 
 router.get('/f1/incidents', f1Controller.getAllIncidents)
 
+router.get('/f1/tracks', f1Controller.getTracks)
+
 module.exports = router;
