@@ -4,7 +4,7 @@ export default function ClubItem({ club }) {
   const navigation = useNavigate();
 
   return (
-    <li className="w-[13rem] h-[12rem] rounded-2xl text-center shadow-lg bg-slate-400 m-2">
+    <li className="w-[13rem] h-[12rem] rounded-2xl text-center shadow-lg bg-slate-400/20 m-2">
       <article className=" flex flex-col justify-between">
         <div className="p-4 justify-center items-center flex flex-row">
           <div>

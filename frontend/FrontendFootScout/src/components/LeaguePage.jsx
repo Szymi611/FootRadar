@@ -46,9 +46,9 @@ export default function LeaguePage() {
           <LeagueTable leagueCode={LeagueCode} />
         </div>
 
-        <div className="col-span-2 row-span-1 bg-amber-600 p-4 h-20">
+        {/* <div className="col-span-2 row-span-1 bg-amber-600 p-4 h-20">
           15
-        </div>
+        </div> */}
       </div>
     </div>
   );
