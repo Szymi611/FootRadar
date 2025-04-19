@@ -8,7 +8,7 @@ import FerrariLogo from "../../assets/LogaF1/Ferrari.png";
 import RedBullLogo from "../../assets/LogaF1/redbull.png";
 import WilliamsLogo from "../../assets/LogaF1/williams.png";
 import AlpineLogo from "../../assets/LogaF1/alpine.png";
-import McLarenLogo from "../../assets/LogaF1/mclaren.png"
+import McLarenLogo from "../../assets/LogaF1/mclaren.png";
 export default function F1Drivers() {
   const [drivers, setDrivers] = useState([]);
 
@@ -31,17 +31,24 @@ export default function F1Drivers() {
     fetchDrivers();
   }, []);
 
+  const hexToRgba = (hex, alpha = 1) => {
+    const r = parseInt(hex.slice(0, 2), 16);
+    const g = parseInt(hex.slice(2, 4), 16);
+    const b = parseInt(hex.slice(4, 6), 16);
+    return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+  };
+
   const teamLogos = {
     "Red Bull Racing": RedBullLogo,
     "Kick Sauber": SauberLogo,
-    "McLaren": McLarenLogo,
-    "Ferrari": FerrariLogo,
-    "Mercedes": MercedesLogo,
+    McLaren: McLarenLogo,
+    Ferrari: FerrariLogo,
+    Mercedes: MercedesLogo,
     "Aston Martin": AstonMartinLogo,
-    'Racing Bulls': RacingBullLogo,
-    "Williams": WilliamsLogo,
+    "Racing Bulls": RacingBullLogo,
+    Williams: WilliamsLogo,
     "Haas F1 Team": HaasLogo,
-    "Alpine" : AlpineLogo,
+    Alpine: AlpineLogo,
   };
 
   return (
@@ -50,8 +57,8 @@ export default function F1Drivers() {
         {drivers.map((driver) => (
           <li
             key={driver.driver_number}
-            style={{ background: `#${driver.team_colour}` }}
-            className="p-4 rounded-2xl "
+            style={{ background: hexToRgba(driver.team_colour, 0.65) }}
+            className="p-4 rounded-2xl"
           >
             <div className="flex items-center space-x-2 w-full">
               <img src={driver.headshot_url} alt="Driver photo" />
@@ -59,7 +66,9 @@ export default function F1Drivers() {
                 {driver.driver_number}
               </p>
               <div>
-                <p className="p-6 text-center items-center flex justify-center">{driver.team_name}</p>
+                <p className="p-6 text-center items-center flex justify-center">
+                  {driver.team_name}
+                </p>
                 {teamLogos[driver.team_name] && (
                   <img
                     src={teamLogos[driver.team_name]}

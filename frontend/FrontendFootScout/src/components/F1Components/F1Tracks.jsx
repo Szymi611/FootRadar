@@ -23,12 +23,12 @@ export default function F1Tracks() {
 
   return (
     <>
-      <div className="flex justify-end pr-6">
-        <ul className="space-y-2 max-h-[200rem] pl-0">
+      <div className="flex justify-center items-center w-full min-h-screen">
+        <ul className="space-y-6 max-h-[200rem] w-max-[600px]">
           {tracks.map((track) => (
-            <li key={track._id} className="p-4 text-black rounded-2xl">
+            <li key={track._id} className="p-4 text-white rounded-2xl">
               <p className="italic text-md">{track.raceName}</p>
-              <img src={track.imgUrl} alt="Track photo" />
+              <img src={track.imgUrl} alt="Track photo" className="bg-white/5 w-full" />
             </li>
           ))}
         </ul>

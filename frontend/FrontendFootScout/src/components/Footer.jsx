@@ -17,7 +17,7 @@ export default function Footer() {
             </a>
             <ul className="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0 dark:text-gray-400">
               <li>
-                <a href="#" className="me-4 md:me-6 relative self-center text-md font-semibold whitespace-nowrap
+                <a href="/about" className="me-4 md:me-6 relative self-center text-md font-semibold whitespace-nowrap
           after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-blue-700 after:transition-all after:duration-300 hover:after:w-full  ">
                   About
                 </a>

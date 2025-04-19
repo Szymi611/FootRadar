@@ -61,6 +61,7 @@ db.run(`CREATE TABLE IF NOT EXISTS players (
 // GET all league bagdes
 app.get("/leaguesBadges", async (req, res) => {
   try {
+
     const response = await fetch(
       "https://api.football-data.org/v4/competitions",
       {
@@ -73,6 +74,7 @@ app.get("/leaguesBadges", async (req, res) => {
     }
 
     const data = await response.json();
+    console.log(data)
     const filterLeagues = data.competitions.filter((league) =>
       leagueCodes.includes(league.code)
     );
