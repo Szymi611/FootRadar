@@ -8,7 +8,6 @@ export default function Badges() {
   const [badges, setBadges] = useState([]);
 
   function handleLeagueChoice(code) {
-    console.log(code);
     navigate(`/league/${code}`);
   }
 
